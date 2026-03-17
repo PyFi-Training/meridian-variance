@@ -211,18 +211,9 @@ def _cfo_brief_user(full_df: pd.DataFrame, plant_briefs: dict) -> str:
 
 # ── Async callers ─────────────────────────────────────────────────────────────
 
-_SEMAPHORE = None
-
-def _get_semaphore():
-    global _SEMAPHORE
-    if _SEMAPHORE is None:
-        _SEMAPHORE = asyncio.Semaphore(20)
-    return _SEMAPHORE
-
-
 async def _call(client: AsyncOpenAI, system: str, user: str,
-                model: str, max_tokens: int, temperature: float) -> str:
-    sem = _get_semaphore()
+                model: str, max_tokens: int, temperature: float,
+                sem: asyncio.Semaphore) -> str:
     async with sem:
         for attempt in range(3):
             try:
@@ -244,6 +235,8 @@ async def _call(client: AsyncOpenAI, system: str, user: str,
 
 async def _run_async(df: pd.DataFrame, verbose: bool) -> dict:
     client = AsyncOpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    # Create semaphore fresh inside this event loop — avoids cross-loop errors on Streamlit Cloud
+    sem = asyncio.Semaphore(20)
     results = {}
 
     # ── PASS 1: Line-item commentary (~76 calls) ──────────────────────────────
@@ -253,7 +246,7 @@ async def _run_async(df: pd.DataFrame, verbose: bool) -> dict:
     commentary_tasks = [
         _call(client, _commentary_system(), _commentary_user(row),
               CONFIG.commentary_model, CONFIG.commentary_max_tokens,
-              CONFIG.commentary_temperature)
+              CONFIG.commentary_temperature, sem)
         for _, row in df.iterrows()
     ]
     results["commentary"] = await asyncio.gather(*commentary_tasks)
@@ -265,7 +258,7 @@ async def _run_async(df: pd.DataFrame, verbose: bool) -> dict:
 
     severity_tasks = [
         _call(client, _severity_system(), _severity_user(row),
-              CONFIG.commentary_model, 5, 0.0)
+              CONFIG.commentary_model, 5, 0.0, sem)
         for _, row in df.iterrows()
     ]
 
@@ -275,7 +268,7 @@ async def _run_async(df: pd.DataFrame, verbose: bool) -> dict:
         _call(client, _dept_summary_system(),
               _dept_summary_user(plant, dept, dept_df),
               CONFIG.summary_model, CONFIG.summary_max_tokens,
-              CONFIG.summary_temperature)
+              CONFIG.summary_temperature, sem)
         for (plant, dept), dept_df in dept_groups
     ]
 
@@ -310,7 +303,7 @@ async def _run_async(df: pd.DataFrame, verbose: bool) -> dict:
             _call(client, _plant_brief_system(),
                   _plant_brief_user(plant, plant_df, plant_depts),
                   CONFIG.summary_model, CONFIG.cfo_brief_max_tokens,
-                  CONFIG.summary_temperature)
+                  CONFIG.summary_temperature, sem)
         )
 
     plant_brief_results = await asyncio.gather(*plant_brief_tasks)
@@ -319,7 +312,7 @@ async def _run_async(df: pd.DataFrame, verbose: bool) -> dict:
 
     cfo_brief = await _call(
         client, _cfo_brief_system(), _cfo_brief_user(df, plant_briefs),
-        CONFIG.summary_model, CONFIG.cfo_brief_max_tokens, CONFIG.summary_temperature,
+        CONFIG.summary_model, CONFIG.cfo_brief_max_tokens, CONFIG.summary_temperature, sem,
     )
     results["cfo_brief"] = cfo_brief
 
