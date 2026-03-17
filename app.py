@@ -65,12 +65,22 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ── API key ───────────────────────────────────────────────────────────────────
-api_key = os.environ.get("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY", "")
-if not api_key:
-    api_key = st.sidebar.text_input("OpenAI API Key", type="password")
-if api_key:
-    os.environ["OPENAI_API_KEY"] = api_key
+# ── API key — always required fresh per session ───────────────────────────────
+# Stored only in session state. Never reads from env vars or Streamlit secrets.
+# The key must be typed explicitly each session — no silent reuse.
+if "api_key" not in st.session_state:
+    st.session_state.api_key = ""
+
+typed_key = st.sidebar.text_input(
+    "OpenAI API Key",
+    type="password",
+    value=st.session_state.api_key,
+    help="Paste your key here. Required each session.",
+)
+if typed_key:
+    st.session_state.api_key = typed_key
+
+api_key = st.session_state.api_key
 
 # ── Session state ─────────────────────────────────────────────────────────────
 for k, v in [("results", None), ("prev_results", None),
@@ -231,7 +241,7 @@ if run_btn:
     timer_thread = threading.Thread(target=update_timer, daemon=True)
     timer_thread.start()
 
-    ai = asyncio.run(_run_async(df, verbose=False))
+    ai = asyncio.run(_run_async(df, verbose=False, api_key=api_key))
 
     running[0] = False
     elapsed = time.time() - start_time
