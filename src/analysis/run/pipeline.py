@@ -233,8 +233,9 @@ async def _call(client: AsyncOpenAI, system: str, user: str,
 
 # ── Main pipeline ─────────────────────────────────────────────────────────────
 
-async def _run_async(df: pd.DataFrame, verbose: bool) -> dict:
-    client = AsyncOpenAI(api_key=os.environ["OPENAI_API_KEY"])
+async def _run_async(df: pd.DataFrame, verbose: bool, api_key: str = "") -> dict:
+    key = api_key or os.environ.get("OPENAI_API_KEY", "")
+    client = AsyncOpenAI(api_key=key)
     # Create semaphore fresh inside this event loop — avoids cross-loop errors on Streamlit Cloud
     sem = asyncio.Semaphore(20)
     results = {}
