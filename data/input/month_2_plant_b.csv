@@ -1,0 +1,39 @@
+plant,department,line_item,budget,actual,is_revenue
+Plant B,Revenue,Product Sales – Industrial Valves,9800000,10580000,True
+Plant B,Revenue,Product Sales – Hydraulic Components,7400000,7120000,True
+Plant B,Revenue,Product Sales – Custom Fabrications,3200000,3560000,True
+Plant B,Revenue,Service Contracts & Field Support,2100000,2390000,True
+Plant B,Cost of Sales,Raw Materials – Steel & Cast Iron,6800000,7820000,False
+Plant B,Cost of Sales,Raw Materials – Seals & Elastomers,980000,1090000,False
+Plant B,Cost of Sales,Direct Labour – Fabrication,3600000,3720000,False
+Plant B,Cost of Sales,Direct Labour – Assembly & Test,1200000,1240000,False
+Plant B,Cost of Sales,Subcontractor – Surface Treatment,620000,580000,False
+Plant B,Cost of Sales,Factory Overhead – Fixed,1100000,1100000,False
+Plant B,Cost of Sales,Factory Overhead – Variable,580000,640000,False
+Plant B,Cost of Sales,Scrap & Rework,195000,242000,False
+Plant B,Sales & Marketing,Salaries – Sales Team,740000,755000,False
+Plant B,Sales & Marketing,Trade Shows & Industrial Exhibitions,220000,148000,False
+Plant B,Sales & Marketing,Advertising & Digital Marketing,145000,158000,False
+Plant B,Sales & Marketing,Distributor & Agent Commissions,280000,308000,False
+Plant B,Sales & Marketing,Customer Entertainment,72000,95000,False
+Plant B,Technology & Systems,ERP – Plant Module Licensing,145000,160000,False
+Plant B,Technology & Systems,CAD & Drafting Software,98000,98000,False
+Plant B,Technology & Systems,IT Infrastructure – Plant B,120000,145000,False
+Plant B,Technology & Systems,Test & Measurement Systems,65000,65000,False
+Plant B,Finance & Legal,Audit – Plant B Allocation,88000,94000,False
+Plant B,Finance & Legal,Legal – Regulatory & Compliance,72000,88000,False
+Plant B,Finance & Legal,Insurance – Plant & Liability,195000,195000,False
+Plant B,Finance & Legal,Banking – Working Capital Facility,145000,138000,False
+Plant B,HR & People,Salaries – Plant Management,560000,571000,False
+Plant B,HR & People,Recruitment – Skilled Trades,118000,78000,False
+Plant B,HR & People,Training – Safety & Compliance,95000,68000,False
+Plant B,HR & People,Employee Benefits,180000,191000,False
+Plant B,Operations & Facilities,Rent & Lease – Plant B Facility,580000,580000,False
+Plant B,Operations & Facilities,Utilities – Gas & Electricity,340000,418000,False
+Plant B,Operations & Facilities,Preventive Maintenance,220000,254000,False
+Plant B,Operations & Facilities,Logistics & Freight – Outbound,245000,271000,False
+Plant B,Operations & Facilities,Environmental & Waste Compliance,78000,84000,False
+Plant B,Corporate / G&A,Executive Compensation – Allocation,295000,295000,False
+Plant B,Corporate / G&A,Depreciation – Plant & Equipment,720000,720000,False
+Plant B,Corporate / G&A,Professional Services – Consulting,145000,162000,False
+Plant B,Corporate / G&A,Travel & Subsistence,112000,148000,False

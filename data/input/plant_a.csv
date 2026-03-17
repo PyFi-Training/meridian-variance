@@ -1,0 +1,39 @@
+plant,department,line_item,budget,actual,is_revenue
+Plant A,Revenue,Product Sales – Precision Parts,18500000,19420000,True
+Plant A,Revenue,Product Sales – Aerospace Components,8200000,7650000,True
+Plant A,Revenue,Service & Maintenance Contracts,3800000,4140000,True
+Plant A,Revenue,Tooling & Custom Fabrication,1900000,1710000,True
+Plant A,Cost of Sales,Raw Materials – Steel & Titanium Alloys,9200000,10380000,False
+Plant A,Cost of Sales,Raw Materials – Specialty Coatings,1800000,1980000,False
+Plant A,Cost of Sales,Direct Labour – CNC Machining,4800000,4950000,False
+Plant A,Cost of Sales,Direct Labour – Quality & Inspection,1400000,1390000,False
+Plant A,Cost of Sales,Subcontractor – Specialist Finishing,980000,840000,False
+Plant A,Cost of Sales,Factory Overhead – Fixed,1650000,1650000,False
+Plant A,Cost of Sales,Factory Overhead – Variable,820000,940000,False
+Plant A,Cost of Sales,Scrap & Rework,310000,428000,False
+Plant A,Sales & Marketing,Salaries – Sales Team,920000,938000,False
+Plant A,Sales & Marketing,Trade Shows & Aerospace Exhibitions,280000,195000,False
+Plant A,Sales & Marketing,Advertising & Technical Marketing,180000,214000,False
+Plant A,Sales & Marketing,Agent & Distributor Commissions,340000,372000,False
+Plant A,Sales & Marketing,Customer Entertainment,95000,128000,False
+Plant A,Technology & Systems,ERP – Plant Module Licensing,165000,181000,False
+Plant A,Technology & Systems,CAD/CAM & Simulation Software,210000,210000,False
+Plant A,Technology & Systems,IT Infrastructure – Plant A,140000,167000,False
+Plant A,Technology & Systems,Metrology & QC Systems,88000,88000,False
+Plant A,Finance & Legal,Audit – Plant A Allocation,98000,105000,False
+Plant A,Finance & Legal,Legal – Contracts & IP,85000,122000,False
+Plant A,Finance & Legal,Insurance – Plant & Equipment,260000,260000,False
+Plant A,Finance & Legal,Banking – Equipment Finance,185000,176000,False
+Plant A,HR & People,Salaries – Plant Management,680000,692000,False
+Plant A,HR & People,Recruitment – Technical Roles,145000,98000,False
+Plant A,HR & People,Training – CNC & Safety Certification,120000,88000,False
+Plant A,HR & People,Employee Benefits,220000,234000,False
+Plant A,Operations & Facilities,Rent & Lease – Plant A Facility,720000,720000,False
+Plant A,Operations & Facilities,Utilities – Gas & Electricity,420000,498000,False
+Plant A,Operations & Facilities,Preventive Maintenance,280000,318000,False
+Plant A,Operations & Facilities,Logistics & Freight – Outbound,310000,356000,False
+Plant A,Operations & Facilities,Environmental & Waste Compliance,95000,102000,False
+Plant A,Corporate / G&A,Executive Compensation – Allocation,380000,380000,False
+Plant A,Corporate / G&A,Depreciation – CNC Machinery,980000,980000,False
+Plant A,Corporate / G&A,Professional Services – Engineering,185000,228000,False
+Plant A,Corporate / G&A,Travel & Subsistence,145000,192000,False

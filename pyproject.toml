@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "meridian-variance"
+version = "1.0.0"
+description = "AI-powered variance analysis — PyFi demo"
+requires-python = ">=3.11"
+dependencies = [
+    "openai>=1.30",
+    "pandas>=2.2",
+    "streamlit>=1.35",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

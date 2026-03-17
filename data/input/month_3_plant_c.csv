@@ -1,0 +1,39 @@
+plant,department,line_item,budget,actual,is_revenue
+Plant C,Revenue,Product Sales – Defence Electronics,6200000,5840000,True
+Plant C,Revenue,Product Sales – Precision Sensors,3800000,4120000,True
+Plant C,Revenue,Service & Commissioning Revenue,1200000,980000,True
+Plant C,Revenue,Development Contract Income,900000,900000,True
+Plant C,Cost of Sales,Raw Materials – PCB & Electronic Components,3400000,3780000,False
+Plant C,Cost of Sales,Raw Materials – Precision Metal Parts,1600000,1720000,False
+Plant C,Cost of Sales,Direct Labour – Assembly & Test,2800000,3040000,False
+Plant C,Cost of Sales,Direct Labour – QA & Compliance,980000,1020000,False
+Plant C,Cost of Sales,Subcontractor – Calibration Services,420000,380000,False
+Plant C,Cost of Sales,Factory Overhead – Fixed,820000,820000,False
+Plant C,Cost of Sales,Factory Overhead – Variable,380000,448000,False
+Plant C,Cost of Sales,Scrap & Rework,180000,264000,False
+Plant C,Sales & Marketing,Salaries – Sales Team,640000,648000,False
+Plant C,Sales & Marketing,Trade Shows & Defence Exhibitions,320000,210000,False
+Plant C,Sales & Marketing,Advertising & Sector Marketing,140000,168000,False
+Plant C,Sales & Marketing,Agent & Distributor Commissions,220000,238000,False
+Plant C,Sales & Marketing,Customer Entertainment,68000,82000,False
+Plant C,Technology & Systems,ERP – Plant Module Licensing,145000,145000,False
+Plant C,Technology & Systems,CAD & Engineering Software,180000,195000,False
+Plant C,Technology & Systems,IT Infrastructure – Plant C,160000,188000,False
+Plant C,Technology & Systems,Security & Compliance Systems,120000,120000,False
+Plant C,Finance & Legal,Audit – Plant C Allocation,88000,92000,False
+Plant C,Finance & Legal,Legal – Defence Contracts,145000,198000,False
+Plant C,Finance & Legal,Insurance – Plant & Liability,180000,180000,False
+Plant C,Finance & Legal,Banking – Working Capital,165000,158000,False
+Plant C,HR & People,Salaries – Plant Management,520000,532000,False
+Plant C,HR & People,Recruitment – Specialist Roles,280000,345000,False
+Plant C,HR & People,Training – Defence & Security Clearance,195000,228000,False
+Plant C,HR & People,Employee Benefits,168000,178000,False
+Plant C,Operations & Facilities,Rent & Lease – Plant C Facility,680000,680000,False
+Plant C,Operations & Facilities,Utilities – Gas & Electricity,280000,318000,False
+Plant C,Operations & Facilities,Preventive Maintenance,180000,224000,False
+Plant C,Operations & Facilities,Logistics & Freight – Outbound,210000,238000,False
+Plant C,Operations & Facilities,Environmental & Waste Compliance,92000,98000,False
+Plant C,Corporate / G&A,Executive Compensation – Allocation,290000,290000,False
+Plant C,Corporate / G&A,Depreciation – Plant & Equipment,540000,540000,False
+Plant C,Corporate / G&A,Professional Services – Setup & Consulting,380000,445000,False
+Plant C,Corporate / G&A,Travel & Subsistence,128000,165000,False
