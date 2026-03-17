@@ -211,16 +211,33 @@ def _cfo_brief_user(full_df: pd.DataFrame, plant_briefs: dict) -> str:
 
 # ── Async callers ─────────────────────────────────────────────────────────────
 
+_SEMAPHORE = None
+
+def _get_semaphore():
+    global _SEMAPHORE
+    if _SEMAPHORE is None:
+        _SEMAPHORE = asyncio.Semaphore(20)
+    return _SEMAPHORE
+
+
 async def _call(client: AsyncOpenAI, system: str, user: str,
                 model: str, max_tokens: int, temperature: float) -> str:
-    r = await client.chat.completions.create(
-        model=model,
-        messages=[{"role": "system", "content": system},
-                  {"role": "user",   "content": user}],
-        max_tokens=max_tokens,
-        temperature=temperature,
-    )
-    return r.choices[0].message.content.strip()
+    sem = _get_semaphore()
+    async with sem:
+        for attempt in range(3):
+            try:
+                r = await client.chat.completions.create(
+                    model=model,
+                    messages=[{"role": "system", "content": system},
+                              {"role": "user",   "content": user}],
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                )
+                return r.choices[0].message.content.strip()
+            except Exception as e:
+                if attempt == 2:
+                    return f"[Error: {str(e)[:60]}]"
+                await asyncio.sleep(2 ** attempt)
 
 
 # ── Main pipeline ─────────────────────────────────────────────────────────────
@@ -280,8 +297,9 @@ async def _run_async(df: pd.DataFrame, verbose: bool) -> dict:
         print(f"  Pass 3 — plant executive briefs ({len(CONFIG.plants)} calls) + "
               f"consolidated CFO brief (1 call), concurrent...")
 
+    actual_plants = df["plant"].unique().tolist()
     plant_brief_tasks = []
-    for plant in CONFIG.plants:
+    for plant in actual_plants:
         plant_df     = df[df["plant"] == plant]
         plant_depts  = {
             dept: dept_summaries[(plant, dept)]
@@ -296,7 +314,7 @@ async def _run_async(df: pd.DataFrame, verbose: bool) -> dict:
         )
 
     plant_brief_results = await asyncio.gather(*plant_brief_tasks)
-    plant_briefs = {p: plant_brief_results[i] for i, p in enumerate(CONFIG.plants)}
+    plant_briefs = {p: plant_brief_results[i] for i, p in enumerate(actual_plants)}
     results["plant_briefs"] = plant_briefs
 
     cfo_brief = await _call(
@@ -312,7 +330,7 @@ def _count_calls(df: pd.DataFrame) -> int:
     line_commentary  = len(df)
     severity_calls   = len(df)
     dept_summaries   = df.groupby(["plant", "department"]).ngroups
-    plant_briefs     = len(CONFIG.plants)
+    plant_briefs     = df["plant"].nunique()
     cfo_brief        = 1
     return line_commentary + severity_calls + dept_summaries + plant_briefs + cfo_brief
 
